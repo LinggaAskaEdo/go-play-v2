@@ -1,0 +1,46 @@
+{
+  "$id": "file://./docs/schema/status.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Request/ Response definition for goplayv2 status. goplayv2 Status CRUD.",
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "metadata": {
+      "description": "response metadata",
+      "$ref": "file://./docs/schema/meta.schema.json",
+      "readOnly": true
+    },
+    "data": {
+      "description": "request and response data",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/status"
+        },
+        "statuses": {
+          "$ref": "#/definitions/statuses"
+        }
+      }
+    },
+    "pagination": {
+      "description": "pagination response. It only will be shown only when fetch many records.",
+      "$ref": "file://./docs/schema/pagination.schema.json",
+      "readOnly": true
+    }
+  },
+  "definitions": {
+    "status": {
+      "description": "insert, update, read single records",
+      "$ref": "file://./docs/schema/goplayv2_status.schema.json"
+    },
+    "statuses": {
+      "description": "read many records",
+      "type": "array",
+      "items": {
+        "$ref": "file://./docs/schema/goplayv2_status.schema.json"
+      }
+    }
+  }
+}

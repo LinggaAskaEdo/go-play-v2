@@ -1,0 +1,46 @@
+{
+  "$id": "file://./docs/schema/goplayv2.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Request/ Response definition for goplayv2. goplayv2 CRUD.",
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "metadata": {
+      "description": "response metadata",
+      "$ref": "file://./docs/schema/meta.schema.json",
+      "readOnly": true
+    },
+    "data": {
+      "description": "request and response data",
+      "type": "object",
+      "properties": {
+        "goplayv2": {
+          "$ref": "#/definitions/goplayv2"
+        },
+        "goplayv2s": {
+          "$ref": "#/definitions/goplayv2"
+        }
+      }
+    },
+    "pagination": {
+      "description": "pagination response. It only will be shown only when fetch many records.",
+      "$ref": "file://./docs/schema/pagination.schema.json",
+      "readOnly": true
+    }
+  },
+  "definitions": {
+    "goplayv2": {
+      "description": "insert, update, read single records",
+      "$ref": "file://./docs/schema/goplayv2_data.schema.json"
+    },
+    "goplayv2s": {
+      "description": "read many records",
+      "type": "array",
+      "items": {
+        "$ref": "file://./docs/schema/goplayv2_data.schema.json"
+      }
+    }
+  }
+}

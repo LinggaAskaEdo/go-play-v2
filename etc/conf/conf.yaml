@@ -1,0 +1,138 @@
+# application:
+#   port: 6666
+#   log: 
+#     path: /var/log/go/app.log
+#     maxSize: 1 # megabytes
+#     maxBackup: 10
+#     maxAge: 30 # days
+#     compress: true # disabled by default
+
+app:
+  port: 6666
+
+log: 
+  enabled: true
+  path: /var/log/go/app.log
+  maxSize: 1 # megabytes
+  maxBackup: 10
+  maxAge: 30 # days
+  compress: true # disabled by default
+
+parser:
+  json:
+    config: "default"
+    indentionStep: "0"
+    marshalFloatWith6Digits: false
+    escapeHTML: true
+    sortMapKeys: false
+    useNumber: true
+    disallowUnknownFields: false
+    tagKey: "json"
+    onlyTaggedField: true
+    validateJsonRawMessage: true
+    objectFieldMustBeSimpleString: false
+    caseSensitive: true
+    schema:
+      status: "file://./docs/schema/status.schema.json"
+      merchant: "file://./docs/schema/goplayv2.schema.json"
+      
+redis:
+  enabled: true
+  password: ""
+  address: 
+    - "localhost:6379"
+  maxRetries: "2"
+  minRetryBackoff: "1s"
+  maxRetryBackoff: '2s'
+  dialTimeout: "5s"
+  readTimeout: "2s"
+  writeTimeout: "2s"
+  poolSize: "50"
+  minIdleConns: "1"
+  maxConnAge: 5m
+  poolTimeout: "60s"
+  idleTimeout: "60s"
+  idleCheckFrequency: "10s"
+  maxRedirects: "3"
+  readOnly: true
+  routeByLatency: true
+  routeRandomly: true
+
+sql:
+  sql-0:
+    enabled: true
+    driver: "mysql"
+    host: "localhost"
+    port: "3306"
+    db: "play-db"
+    user: "root"
+    password: "a5k4CooL"
+    ssl: false
+    connOptions:
+      maxIdleConns: 5
+      maxOpenConns: 20
+      connMaxLifetime: 60
+      connMaxIdleTime: 10
+  sql-1:
+    enabled: true
+    driver: "postgres"
+    host: "localhost"
+    port: "5432"
+    db: "postgres"
+    user: "root"
+    password: "a5k4CooL"
+    ssl: false
+    connOptions:
+      maxIdleConns: 5
+      maxOpenConns: 20
+      connMaxLifetime: 60
+      connMaxIdleTime: 10
+
+httpmux:
+  swagger:
+    enabled: true
+    path: "/swagger/"
+    docFile: "/swaggers/swagger.json"
+    basicAuth:
+      username: "go-play-v2"
+      password: "P@s5w0rd"
+    swaggerTemplate:
+      enabled: true
+      templateFile: "docs/swagger.json"
+      path: "/swaggers/swagger.json"
+      basicAuth:
+        username: "go-play-v2"
+        password: "P@s5w0rd"
+      goTemplate:
+        description: "Swagger"
+        title: "go-play-v2"
+        version: "n/a"
+        schemes: "http"
+        host: "localhost:6666"
+        basePath: "/"
+  cors:
+    enabled: true
+    mode: "allowall"
+    allowedOrigins:
+      - ""
+    allowedMethods:
+      - "POST"
+      - "GET"
+      - "PATCH"
+      - "PUT"
+      - "DELETE"
+    allowedHeaders:
+      - "X-Requested-With"
+      - "Authorization"
+    exposedHeaders:
+      - "x-request-id"
+    maxAge: "65000"
+    allowCredentials: true
+    optionsPassthrough: true
+    debug: false
+
+auth:
+  privateKeyPath: "./etc/auth/app.rsa.pub"
+  publicKeyPath: "./etc/enc/app.rsa"
+  cacheBin: "1000"
+  cacheExpirationTime: 10m

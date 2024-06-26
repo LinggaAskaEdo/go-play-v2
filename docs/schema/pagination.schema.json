@@ -1,0 +1,42 @@
+{
+  "$id": "file://./docs/schema/pagination.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Common response definition for Pagination.",
+  "type": "object",
+  "properties": {
+    "current_page": {
+      "type": "integer",
+      "readOnly": true,
+      "exclusiveMinimum": 0
+    },
+    "current_elements": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "total_pages": {
+      "type": "integer",
+      "readOnly": true,
+      "exclusiveMinimum": 0
+    },
+    "total_elements": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "sort_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "readOnly": true
+    }
+  },
+  "required": [
+    "current_page",
+    "current_elements",
+    "total_pages",
+    "total_elements",
+    "sort_by"
+  ],
+  "definitions": {}
+}

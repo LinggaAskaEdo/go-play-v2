@@ -1,0 +1,54 @@
+{
+  "$id": "file://./docs/schema/meta.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Common response definition for metadata.",
+  "type": "object",
+  "required": [
+    "path",
+    "status_code",
+    "status",
+    "message",
+    "timestamp"
+  ],
+  "properties": {
+    "path": {
+      "type": "string",
+      "readOnly": true
+    },
+    "status_code": {
+      "type": "integer",
+      "readOnly": true,
+      "exclusiveMinimum": 0
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "message": {
+          "type": "string",
+          "minLength": 5
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "minLength": 2
+    },
+    "message": {
+      "type": "string",
+      "minLength": 10
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {}
+}

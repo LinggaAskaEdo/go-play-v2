@@ -1,0 +1,44 @@
+{
+  "$id": "file://./docs/schema/goplayv2_status.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "goplayv2 status definition.",
+  "type": [
+    "object",
+    "array"
+  ],
+  "properties": {
+    "status": {
+      "oneOf": [
+        {
+          "type": "object",
+          "$ref": "#/definitions/status"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/status"
+          },
+          "uniqueItems": true
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "status": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "code",
+        "description"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
